@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"regexp"
@@ -11,48 +11,45 @@ import (
 
 // Precompile the regex pattern globally
 var (
-	
-	validateHOAPattern = regexp.MustCompile(`^\d{15}$`)
-	validatePersonnelNamePattern = regexp.MustCompile(`^[A-Za-z][A-Za-z\s]{1,48}[A-Za-z]$`)
-	validateAddressPattern = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9\s,.-]{1,48}[A-Za-z0-9]$`)
-	validateEmailPattern = regexp.MustCompile(`^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
-	gValidatePhoneLengthPattern =  regexp.MustCompile(`^\d{10}$`)
-	allZerosRegex = regexp.MustCompile("^0+$")
-	gValidateSOBONamePattern = regexp.MustCompile(`^[A-Za-z][A-Za-z\s]{1,48}[A-Za-z]$`)
-	gValidatePANNumberPattern = regexp.MustCompile(`^[A-Z]{5}[0-9]{4}[A-Z]$`)
+	HOAPattern                                = regexp.MustCompile(`^\d{15}$`)
+	PersonnelNamePattern                      = regexp.MustCompile(`^[A-Za-z][A-Za-z\s]{1,48}[A-Za-z]$`)
+	AddressPattern                            = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9\s,.-]{1,48}[A-Za-z0-9]$`)
+	EmailPattern                              = regexp.MustCompile(`^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
+	gValidatePhoneLengthPattern               = regexp.MustCompile(`^\d{10}$`)
+	allZerosRegex                             = regexp.MustCompile("^0+$")
+	gValidateSOBONamePattern                  = regexp.MustCompile(`^[A-Za-z][A-Za-z\s]{1,48}[A-Za-z]$`)
+	gValidatePANNumberPattern                 = regexp.MustCompile(`^[A-Z]{5}[0-9]{4}[A-Z]$`)
 	gValidateVehicleRegistrationNumberPattern = regexp.MustCompile(`^[A-Z]{2}\d{2}[A-Z]{1,2}\d{4,7}$`)
-	gValidateBarCodeNumberPattern = regexp.MustCompile(`^[A-Z]{2}\d{6,12}[A-Z]{2}$`)
-	alphanumericRegex = regexp.MustCompile(`^[A-Z0-9]+$`)
-	trainNoPattern = regexp.MustCompile(`^\d{5}$`)
-	customValidateGLCodePattern = regexp.MustCompile(`^GL\d{11}$`)
-	timeStampValidatePattern = regexp.MustCompile(`^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\d{4}) ([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$`)
-	customValidateAnyStringLengthto50Pattern = regexp.MustCompile(`^[a-zA-Z][a-zA-Z0-9]{0,48}[a-zA-Z]$`)
-	dateyyyymmddPattern =regexp.MustCompile(`^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$`)
-	dateddmmyyyyPattern = regexp.MustCompile(`^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$`)
-	validateEmployeeIDPattern = regexp.MustCompile(`^\d{8}$`)
-	validateGSTINPattern = regexp.MustCompile(`^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[0-9]{1}$`)
-	specialCharPattern = regexp.MustCompile(`[!@#$%^&*()<>:;"{}[\]\\]`)
-	validateBankUserIDPattern = regexp.MustCompile(`^[A-Z0-9]{1,50}$`)
-	validateOrderNumberPattern = regexp.MustCompile(`^[A-Z]{2}\d{19}$`)
-	validateAWBNumberPattern = regexp.MustCompile(`^[A-Z]{4}\d{9}$`)
-	validatePNRNoPattern = regexp.MustCompile(`^[A-Z]{3}\d{6}$`)
-	validatePLIIDPattern = regexp.MustCompile(`^[A-Z]{3}\d{10}$`)
-	validatePaymentTransIDPattern = regexp.MustCompile(`^\d{2}[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$`)
-	validateOfficeCustomerIDPattern = regexp.MustCompile(`^[a-zA-Z0-9\-]{1,50}$`)
-	validateBankIDPattern = regexp.MustCompile(`^[A-Z0-9]{1,50}$`)
-	validateCSIFacilityIDPattern = regexp.MustCompile(`^[A-Z]{2}\d{11}$`)
-	validatePosBookingOrderNumberPattern = regexp.MustCompile(`^[A-Z]{2}\d{19}$`) 
-	validateSOLIDPattern = regexp.MustCompile(`^\d{6}\d{2}$`)
-	validatePLIOfficeIDPattern = regexp.MustCompile(`^[A-Z]{3}\d{10}$`)
-	validateProductCodePattern = regexp.MustCompile(`^[A-Z]{3}\d{12}$`)
-	validateCustomerIDPattern = regexp.MustCompile(`^\d{10}$`)
-	validateFacilityIDPattern = regexp.MustCompile(`^[A-Z]{2}\d{11}$`)
-	validateApplicationIDPattern = regexp.MustCompile(`^[A-Z]{3}\d{8}-\d{3}$`)
-	validateReceiverKYCReferencePattern = regexp.MustCompile(`^KYCREF[A-Z0-9]{0,44}$`)
-	validateOfficeCustomerPattern = regexp.MustCompile(`^[a-zA-Z0-9\s]+$`)
-	validatePRANPattern = regexp.MustCompile(`^\d{12}$`)
-
-
+	gValidateBarCodeNumberPattern             = regexp.MustCompile(`^[A-Z]{2}\d{6,12}[A-Z]{2}$`)
+	alphanumericRegex                         = regexp.MustCompile(`^[A-Z0-9]+$`)
+	trainNoPattern                            = regexp.MustCompile(`^\d{5}$`)
+	customValidateGLCodePattern               = regexp.MustCompile(`^GL\d{11}$`)
+	timeStampValidatePattern                  = regexp.MustCompile(`^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\d{4}) ([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$`)
+	customValidateAnyStringLengthto50Pattern  = regexp.MustCompile(`^[a-zA-Z][a-zA-Z0-9]{0,48}[a-zA-Z]$`)
+	dateyyyymmddPattern                       = regexp.MustCompile(`^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$`)
+	dateddmmyyyyPattern                       = regexp.MustCompile(`^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$`)
+	validateEmployeeIDPattern                 = regexp.MustCompile(`^\d{8}$`)
+	validateGSTINPattern                      = regexp.MustCompile(`^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[0-9]{1}$`)
+	specialCharPattern                        = regexp.MustCompile(`[!@#$%^&*()<>:;"{}[\]\\]`)
+	validateBankUserIDPattern                 = regexp.MustCompile(`^[A-Z0-9]{1,50}$`)
+	validateOrderNumberPattern                = regexp.MustCompile(`^[A-Z]{2}\d{19}$`)
+	validateAWBNumberPattern                  = regexp.MustCompile(`^[A-Z]{4}\d{9}$`)
+	validatePNRNoPattern                      = regexp.MustCompile(`^[A-Z]{3}\d{6}$`)
+	validatePLIIDPattern                      = regexp.MustCompile(`^[A-Z]{3}\d{10}$`)
+	validatePaymentTransIDPattern             = regexp.MustCompile(`^\d{2}[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[89abAB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$`)
+	validateOfficeCustomerIDPattern           = regexp.MustCompile(`^[a-zA-Z0-9\-]{1,50}$`)
+	validateBankIDPattern                     = regexp.MustCompile(`^[A-Z0-9]{1,50}$`)
+	validateCSIFacilityIDPattern              = regexp.MustCompile(`^[A-Z]{2}\d{11}$`)
+	validatePosBookingOrderNumberPattern      = regexp.MustCompile(`^[A-Z]{2}\d{19}$`)
+	validateSOLIDPattern                      = regexp.MustCompile(`^\d{6}\d{2}$`)
+	validatePLIOfficeIDPattern                = regexp.MustCompile(`^[A-Z]{3}\d{10}$`)
+	validateProductCodePattern                = regexp.MustCompile(`^[A-Z]{3}\d{12}$`)
+	validateCustomerIDPattern                 = regexp.MustCompile(`^\d{10}$`)
+	validateFacilityIDPattern                 = regexp.MustCompile(`^[A-Z]{2}\d{11}$`)
+	validateApplicationIDPattern              = regexp.MustCompile(`^[A-Z]{3}\d{8}-\d{3}$`)
+	validateReceiverKYCReferencePattern       = regexp.MustCompile(`^KYCREF[A-Z0-9]{0,44}$`)
+	validateOfficeCustomerPattern             = regexp.MustCompile(`^[a-zA-Z0-9\s]+$`)
+	validatePRANPattern                       = regexp.MustCompile(`^\d{12}$`)
 )
 
 // ValidateWithRegex is a common function that validates a string field against a provided regex pattern.
@@ -64,7 +61,7 @@ func ValidateWithGlobalRegex(fl validator.FieldLevel, regex *regexp.Regexp) bool
 // ValidateHOA checks if the provided string is a valid HOA(Head Of Account). -- Check if Status is 15 digit numeric value.
 func ValidateHOAPattern(fl validator.FieldLevel) bool {
 	//pattern := `^\d{15}$`
-	return ValidateWithGlobalRegex(fl, validateHOAPattern)
+	return ValidateWithGlobalRegex(fl, HOAPattern)
 }
 
 // ValidatePersonnelName checks if the provided string is a valid Personnel Name.
@@ -73,14 +70,14 @@ func ValidateHOAPattern(fl validator.FieldLevel) bool {
 // 1 (first letter) + 48 (middle characters) + 1 (last letter) = 50 characters.
 func ValidatePersonnelNamePattern(fl validator.FieldLevel) bool {
 	//pattern := `^[A-Za-z][A-Za-z\s]{1,48}[A-Za-z]$`
-	return ValidateWithGlobalRegex(fl, validatePersonnelNamePattern)
+	return ValidateWithGlobalRegex(fl, PersonnelNamePattern)
 }
 
 // ValidateAddress checks if the provided string is a valid address.
 // Address should start with a letter and has a length between 3 and 50 characters
 func ValidateAddressPattern(fl validator.FieldLevel) bool {
 	//pattern := `^[A-Za-z0-9][A-Za-z0-9\s,.-]{1,48}[A-Za-z0-9]$`
-	return ValidateWithGlobalRegex(fl, validateAddressPattern)
+	return ValidateWithGlobalRegex(fl, AddressPattern)
 }
 
 // ValidateEmail checks if the provided string is a valid email address.
@@ -91,7 +88,7 @@ func ValidateAddressPattern(fl validator.FieldLevel) bool {
 func ValidateEmailPattern(fl validator.FieldLevel) bool {
 	//pattern := `^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
 
-	return ValidateWithGlobalRegex(fl, validateEmailPattern)
+	return ValidateWithGlobalRegex(fl, EmailPattern)
 }
 
 // global validaton of phone length from library/template
@@ -101,7 +98,7 @@ func GValidatePhoneLengthPattern(fl validator.FieldLevel) bool {
 		// Validate using a regular expression for exactly 10 digits
 		// pattern := `^\d{10}$`
 		// return ValidateWithRegex(fl, pattern)
-		return ValidateWithGlobalRegex(fl,gValidatePhoneLengthPattern)
+		return ValidateWithGlobalRegex(fl, gValidatePhoneLengthPattern)
 	}
 
 	// Handle the case where the phone number is a uint64
@@ -162,7 +159,7 @@ func GValidateSOBONamePattern(f1 validator.FieldLevel) bool {
 	// [A-Za-z\s]{1,48} -> 1 to 48 letters or spaces
 	// [A-Za-z]$ -> End with a letter
 	//pattern := `^[A-Za-z][A-Za-z\s]{1,48}[A-Za-z]$`
-	
+
 	return ValidateWithGlobalRegex(f1, gValidateSOBONamePattern)
 }
 
@@ -297,7 +294,7 @@ func IsValidTimestampGlobal(fl validator.FieldLevel) bool {
 // validate time stamp in format :DD-MM-YYYY HH:MM:SS
 func TimeStampValidatePattern(f1 validator.FieldLevel) bool {
 	//dateTimeRegex := regexp.MustCompile(`^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\d{4}) ([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$`)
-	return ValidateWithGlobalRegex(f1,timeStampValidatePattern)
+	return ValidateWithGlobalRegex(f1, timeStampValidatePattern)
 }
 
 //validate any string length to  50
