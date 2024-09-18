@@ -1,4 +1,4 @@
-package main
+package ceptcustomvalidation
 
 import (
 	"regexp"
@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/go-playground/validator/v10"
-	//en_translations "github.com/go-playground/validator/v10/translations/en"
 )
 
 // Precompile the regex pattern globally
@@ -52,13 +51,20 @@ var (
 	validatePRANPattern                       = regexp.MustCompile(`^\d{12}$`)
 )
 
-func main() {
+func NewValidator() *validator.Validate {
 	validate := validator.New()
-	// Register the custom validation
-	validate.RegisterValidation("pincodeCustom", ValidatePinCodeGlobal)
+
+	// Register the custom validation with a specific tag
+	validate.RegisterValidation("customHeadOfAccount", ValidateHOAPattern)
+	validate.RegisterValidation("customPersonnelName", ValidatePersonnelNamePattern)
+	validate.RegisterValidation("customAddressPattern", ValidateAddressPattern)
+	validate.RegisterValidation("customEmailPattern", ValidateEmailPattern)
+	validate.RegisterValidation("customPincode", ValidatePinCodeGlobal)
+
+	return validate
 }
 
-// ValidateWithRegex is a common function that validates a string field against a provided regex pattern.
+// ValidateWithGlobalRegex is a common function that validates a string field against a provided regex pattern.
 func ValidateWithGlobalRegex(fl validator.FieldLevel, regex *regexp.Regexp) bool {
 	fieldValue := fl.Field().String()
 	return regex.MatchString(fieldValue)
