@@ -19,7 +19,7 @@ var (
 	allZerosRegex                             = regexp.MustCompile("^0+$")
 	gValidateSOBONamePattern                  = regexp.MustCompile(`^[A-Za-z][A-Za-z\s]{1,48}[A-Za-z]$`)
 	gValidatePANNumberPattern                 = regexp.MustCompile(`^[A-Z]{5}[0-9]{4}[A-Z]$`)
-	gValidateVehicleRegistrationNumberPattern = regexp.MustCompile(`^[A-Z]{2}\d{2}[A-Z]{1,2}\d{4,7}$`)
+	gValidateVehicleRegistrationNumberPattern = regexp.MustCompile(`^[A-Z]{2}\d{2}[A-Z]{1,2}\d{4,7}$ |\d{2}[A-Z]{2}\d{4}[A-Z]{2}$`)
 	gValidateBarCodeNumberPattern             = regexp.MustCompile(`^[A-Z]{2}\d{6,12}[A-Z]{2}$`)
 	alphanumericRegex                         = regexp.MustCompile(`^[A-Z0-9]+$`)
 	trainNoPattern                            = regexp.MustCompile(`^\d{5}$`)
@@ -51,6 +51,12 @@ var (
 	validateOfficeCustomerPattern             = regexp.MustCompile(`^[a-zA-Z0-9\s]+$`)
 	validatePRANPattern                       = regexp.MustCompile(`^\d{12}$`)
 )
+
+func main() {
+	validate := validator.New()
+	// Register the custom validation
+	validate.RegisterValidation("pincodeCustom", ValidatePinCodeGlobal)
+}
 
 // ValidateWithRegex is a common function that validates a string field against a provided regex pattern.
 func ValidateWithGlobalRegex(fl validator.FieldLevel, regex *regexp.Regexp) bool {
