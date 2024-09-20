@@ -1,3 +1,4 @@
+// ceptcustomvalidation.go
 package ceptcustomvalidation
 
 import (
@@ -59,6 +60,42 @@ func NewValidator() *validator.Validate {
 	validate.RegisterValidation("customPersonnelName", ValidatePersonnelNamePattern)
 	validate.RegisterValidation("customAddressPattern", ValidateAddressPattern)
 	validate.RegisterValidation("customEmailPattern", ValidateEmailPattern)
+	validate.RegisterValidation("customValidatePhoneLengthPattern", GValidatePhoneLengthPattern)
+	//validate.RegisterValidation("allZerosRegex", AllZerosRegex)
+	validate.RegisterValidation("gValidateSOBONamePattern", GValidateSOBONamePattern)
+	validate.RegisterValidation("gValidatePANNumberPattern", GValidatePANNumberPattern)
+	validate.RegisterValidation("gValidateVehicleRegistrationNumberPattern", GValidateVehicleRegistrationNumberPattern)
+	validate.RegisterValidation("gValidateBarCodeNumberPattern", GValidateBarCodeNumberPattern)
+	//validate.RegisterValidation("alphanumericRegex", AlphanumericRegex)
+	//validate.RegisterValidation("trainNoPattern", TrainNoPattern)
+	validate.RegisterValidation("customValidateGLCodePattern", CustomValidateGLCodePattern)
+	validate.RegisterValidation("timeStampValidatePattern", TimeStampValidatePattern)
+	validate.RegisterValidation("customValidateAnyStringLengthto50Pattern", CustomValidateAnyStringLengthto50Pattern)
+	validate.RegisterValidation("dateyyyymmddPattern", DateyyyymmddPattern)
+	validate.RegisterValidation("dateddmmyyyyPattern", DateddmmyyyyPattern)
+	validate.RegisterValidation("validateEmployeeIDPattern", ValidateEmployeeIDPattern)
+	validate.RegisterValidation("validateGSTINPattern", ValidateGSTINPattern)
+	//validate.RegisterValidation("specialCharPattern", specialCharPattern)
+	validate.RegisterValidation("validateBankUserIDPattern", ValidateBankUserIDPattern)
+	validate.RegisterValidation("validateOrderNumberPattern", ValidateOrderNumberPattern)
+	validate.RegisterValidation("validateAWBNumberPattern", ValidateAWBNumberPattern)
+	validate.RegisterValidation("validatePNRNoPattern", ValidatePNRNoPattern)
+	validate.RegisterValidation("validatePLIIDPattern", ValidatePLIIDPattern)
+	validate.RegisterValidation("validatePaymentTransIDPattern", ValidatePaymentTransIDPattern)
+	validate.RegisterValidation("validateOfficeCustomerIDPattern", ValidateOfficeCustomerIDPattern)
+	validate.RegisterValidation("validateBankIDPattern", ValidateBankIDPattern)
+	validate.RegisterValidation("validateCSIFacilityIDPattern", ValidateCSIFacilityIDPattern)
+	validate.RegisterValidation("validatePosBookingOrderNumberPattern", ValidatePosBookingOrderNumberPattern)
+	validate.RegisterValidation("validateSOLIDPattern", ValidateSOLIDPattern)
+	validate.RegisterValidation("validatePLIOfficeIDPattern", ValidatePLIOfficeIDPattern)
+	validate.RegisterValidation("validateProductCodePattern", ValidateProductCodePattern)
+	validate.RegisterValidation("validateCustomerIDPattern", ValidateCustomerIDPattern)
+	validate.RegisterValidation("validateFacilityIDPattern", ValidateFacilityIDPattern)
+	validate.RegisterValidation("validateApplicationIDPattern", ValidateApplicationIDPattern)
+	validate.RegisterValidation("validateReceiverKYCReferencePattern", ValidateReceiverKYCReferencePattern)
+	validate.RegisterValidation("validateOfficeCustomerPattern", ValidateOfficeCustomerPattern)
+	validate.RegisterValidation("validatePRANPattern", ValidatePRANPattern)
+
 	validate.RegisterValidation("customPincode", ValidatePinCodeGlobal)
 
 	return validate
